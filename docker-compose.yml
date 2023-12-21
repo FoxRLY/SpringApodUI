@@ -1,0 +1,16 @@
+include:
+  - ../../nasaapod/docker-compose.yml
+version: "3.9"
+services:
+  app-ui:
+    container_name: ${UI_CONTAINER_NAME}
+    restart: always
+    build: .
+    ports:
+      - "8092:8092"
+    environment:
+      - IMAGE_SERVICE_CONTAINER_NAME=${IMAGE_SERVICE_CONTAINER_NAME}
+      - UI_CONTAINER_NAME=${UI_CONTAINER_NAME}
+    depends_on:
+      - app
+      - postgres

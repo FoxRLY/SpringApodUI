@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>APOD</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/htmx.org@1.9.9"></script>
+</head>
+<body class="flex flex-col justify-center items-center font-sans font-light text-center text-4xl">
+<div id="apod-result" class="flex flex-col justify-center items-center">
+    <h1 class="bg-blue-100 text-center">A Picture Of The Day</h1>
+</div>
+<div class="flex flex-row justify-center items-center">
+    <div>Enter the date: </div>
+    <input name="date"/>
+    <button hx-get="/picture" hx-target="#apod-result" hx-swap="innerHTML" hx-include="[name='date']">
+        Find a picture of the day
+    </button>
+</div>
+</body>
+</html>
