@@ -1,5 +1,3 @@
-include:
-  - ../../nasaapod/docker-compose.yml
 version: "3.9"
 services:
   app-ui:
@@ -11,6 +9,3 @@ services:
     environment:
       - IMAGE_SERVICE_CONTAINER_NAME=${IMAGE_SERVICE_CONTAINER_NAME}
       - UI_CONTAINER_NAME=${UI_CONTAINER_NAME}
-    depends_on:
-      - app
-      - postgres

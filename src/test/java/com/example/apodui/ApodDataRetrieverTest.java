@@ -1,5 +1,7 @@
 package com.example.apodui;
 
+import com.example.apodui.dto.ApodData;
+import com.example.apodui.services.ApodDataRetriever;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import okhttp3.mockwebserver.MockResponse;
@@ -17,7 +19,7 @@ class ApodDataRetrieverTest {
 
     static ObjectMapper jsonMapper = new ObjectMapper();
     static MockWebServer mockServer;
-    static ApodDataRetriver imageDownloader;
+    static ApodDataRetriever imageDownloader;
 
     @BeforeAll
     static void setUp() throws IOException {
@@ -33,14 +35,15 @@ class ApodDataRetrieverTest {
     @BeforeEach
     void init(){
         String host = String.format("http://localhost:%s", mockServer.getPort());
-        WebClient client = WebClient.create();
-        imageDownloader = new ApodDataRetriver(host, client);
+        WebClient client = WebClient.create(host);
+        imageDownloader = new ApodDataRetriever(client);
     }
 
     @Test
     @DisplayName("Получение данных из APOD-сервиса по валидным данным")
     void downloadImageByDate() throws RuntimeException, JsonProcessingException {
         ApodData expectedData = new ApodData(
+                0L,
                 "2020-02-02",
                 "sdfkljwefl",
                 "fdslkfj",

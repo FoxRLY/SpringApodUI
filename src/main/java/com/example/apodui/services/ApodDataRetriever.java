@@ -1,9 +1,8 @@
-package com.example.apodui;
+package com.example.apodui.services;
 
 
+import com.example.apodui.dto.ApodData;
 import lombok.RequiredArgsConstructor;
-import org.apache.coyote.BadRequestException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -14,17 +13,11 @@ import java.time.LocalDate;
 
 @Service
 @RequiredArgsConstructor
-public class ApodDataRetriver {
+public class ApodDataRetriever {
     @Value("${imagestore.url}")
     private String pictureServiceUrl;
 
     private final WebClient client;
-
-    @Autowired
-    public ApodDataRetriver(@Value("${imagestore.url}") String url, WebClient client){
-        this.pictureServiceUrl = url;
-        this.client = client;
-    }
 
     public Mono<ApodData> getApodData(LocalDate date){
         return client.get()
